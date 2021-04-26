@@ -2,7 +2,7 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
 
-class DatasetMetadataPlugin(plugins.SingletonPlugin, tk.DefaultDatasetForm):
+class DatasetMetadataPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IConfigurer)
 
