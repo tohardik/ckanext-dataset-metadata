@@ -22,17 +22,20 @@ class DatasetMetadataPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm)
         return schema
 
     def create_package_schema(self):
+        print("DEBUGGING called create_package_schema()")
         # let's grab the default schema in our plugin
         schema = super(DatasetMetadataPlugin, self).create_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
 
     def update_package_schema(self):
+        print("DEBUGGING called update_package_schema()")
         schema = super(DatasetMetadataPlugin, self).update_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
 
     def show_package_schema(self):
+        print("DEBUGGING called show_package_schema()")
         schema = super(DatasetMetadataPlugin, self).show_package_schema()
         schema.update({
             'custom_text': [tk.get_converter('convert_from_extras'),
