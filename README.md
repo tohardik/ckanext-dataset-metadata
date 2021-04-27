@@ -31,6 +31,19 @@ Suggested values:
 
 ## Installation
 
+docker exec -it ckan bash
+
+source $CKAN_VENV/bin/activate && cd $CKAN_VENV/src/
+rm -rf ckanext-dataset-metadata-master/
+rm master.zip
+wget https://github.com/tohardik/ckanext-dataset-metadata/archive/refs/heads/master.zip
+unzip master.zip
+cd ckanext-dataset-metadata-master/
+pip install -r requirements.txt
+python setup.py install
+
+
+
 **TODO:** Add any additional install steps to the list below.
    For example installing any non-Python dependencies or adding any required
    config settings.
