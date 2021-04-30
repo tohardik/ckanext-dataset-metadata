@@ -16,8 +16,8 @@ class DatasetMetadataPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm)
 
     def _modify_package_schema(self, schema):
         schema.update({
-            'custom_text': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')]
+            'custom_text': [toolkit.get_validator('ignore_missing'),
+                            toolkit.get_converter('convert_to_extras')]
         })
         return schema
 
@@ -38,8 +38,8 @@ class DatasetMetadataPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm)
         print("DEBUGGING called show_package_schema()")
         schema = super(DatasetMetadataPlugin, self).show_package_schema()
         schema.update({
-            'custom_text': [tk.get_converter('convert_from_extras'),
-                            tk.get_validator('ignore_missing')]
+            'custom_text': [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')]
         })
         return schema
 
