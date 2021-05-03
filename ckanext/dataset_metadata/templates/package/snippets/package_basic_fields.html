@@ -12,7 +12,8 @@
             {% set empty_license = _('Please select the license') %}
             <option value="">{{ empty_license }}</option>
             {% for license_id, license_desc in h.license_options(existing_license_id) %}
-            <option value="{{ license_id }}" {% if existing_license_id == license_id or (existing_license_id is none and license_id == "cc-nc") %}selected="selected"{% endif %}>{{ license_desc }}</option>
+            {% set no_option_selected = existing_license_id is none or existing_license_id == "" %}
+            <option value="{{ license_id }}" {% if existing_license_id == license_id or (no_option_selected and license_id == "cc-nc") %}selected="selected"{% endif %}>{{ license_desc }}</option>
             {% endfor %}
           </select>
           {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
