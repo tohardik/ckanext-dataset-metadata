@@ -39,6 +39,6 @@
     {% else %}
         {% set publisher_uri_value = data.get('publisher_uri') %}
     {% endif %}
-    {{ data.get('publisher_uri') }} and {{ publisher_uri_value }}
+
     {{ form.input('publisher_uri', label=_('Publisher URI'), id='field-publisher_uri', placeholder=_('https://dice-research.org/'), value=publisher_uri_value, error=errors.publisher_uri, classes=['control-medium']) }}
 {% endblock %}
