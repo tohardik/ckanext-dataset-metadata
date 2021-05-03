@@ -33,5 +33,6 @@
   {% endblock %}
 
 {% block package_basic_fields_custom %}
-  {{ form.input('publisher_uri', label=_('Publisher URI'), id='field-publisher_uri', placeholder=_('https://dice-research.org/'), value=data.publisher_uri, error=errors.publisher_uri, classes=['control-medium']) }}
+  {% set publisher_uri_value = data.publisher_uri if data.publisher_uri is not none else "https://dice-research.org/" %}
+  {{ form.input('publisher_uri', label=_('Publisher URI'), id='field-publisher_uri', placeholder=_('https://dice-research.org/'), value=publisher_uri_value, error=errors.publisher_uri, classes=['control-medium']) }}
 {% endblock %}
