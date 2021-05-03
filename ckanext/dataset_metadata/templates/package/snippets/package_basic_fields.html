@@ -1,38 +1,44 @@
 {% ckan_extends %}
 
-  {% block package_basic_fields_license %}
-  <div class="form-group">
-    {% set error = errors.license_id %}
-    <label class="control-label" for="field-license">{{ _("License") }}</label>
-    <div class="controls">
-      <div class="row">
-        <div class="col-md-6">
-          <select id="field-license" name="license_id" data-module="autocomplete">
-            {% set existing_license_id = data.get('license_id') %}
-            {% set empty_license = _('Please select the license') %}
-            <option value="">{{ empty_license }}</option>
-            {% for license_id, license_desc in h.license_options(existing_license_id) %}
-            {% set no_option_selected = existing_license_id is none or existing_license_id == "" %}
-            <option value="{{ license_id }}" {% if existing_license_id == license_id or (no_option_selected and license_id == "cc-nc") %}selected="selected"{% endif %}>{{ license_desc }}</option>
-            {% endfor %}
-          </select>
-          {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
-        </div>
-        <div class="col-md-6">
+{% block package_basic_fields_license %}
+    <div class="form-group">
+        {% set error = errors.license_id %}
+        <label class="control-label" for="field-license">{{ _("License") }}</label>
+        <div class="controls">
+            <div class="row">
+                <div class="col-md-6">
+                    <select id="field-license" name="license_id" data-module="autocomplete">
+                        {% set existing_license_id = data.get('license_id') %}
+                        {% set empty_license = _('Please select the license') %}
+                        <option value="">{{ empty_license }}</option>
+                        {% for license_id, license_desc in h.license_options(existing_license_id) %}
+                            {% set no_option_selected = existing_license_id is none or existing_license_id == "" %}
+                            <option value="{{ license_id }}"
+                                    {% if existing_license_id == license_id or (no_option_selected and license_id == "cc-nc") %}selected="selected"{% endif %}>{{ license_desc }}</option>
+                        {% endfor %}
+                    </select>
+                    {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
+                </div>
+                <div class="col-md-6">
           <span class="info-block info-inline">
             <i class="fa fa-info-circle"></i>
-            {% trans %}
-            License definitions and additional information can be found
-            at <a href="http://opendefinition.org/licenses/">opendefinition.org</a>
-            {% endtrans %}
+              {% trans %}
+                  License definitions and additional information can be found
+                  at <a href="http://opendefinition.org/licenses/">opendefinition.org</a>
+              {% endtrans %}
           </span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  {% endblock %}
+{% endblock %}
 
 {% block package_basic_fields_custom %}
-  {% set publisher_uri_value = data.publisher_uri if data.publisher_uri is not none else "https://dice-research.org/" %}
-  {{ form.input('publisher_uri', label=_('Publisher URI'), id='field-publisher_uri', placeholder=_('https://dice-research.org/'), value=publisher_uri_value, error=errors.publisher_uri, classes=['control-medium']) }}
+    {% if data.get('publisher_uri') is none %}
+        {% set publisher_uri_value = "https://dice-research.org/" %}
+    {% else %}
+        {% set publisher_uri_value = data.get('publisher_uri') %}
+    {% endif %}
+    {{ data.get('publisher_uri') }} and {{ publisher_uri_value }}
+    {{ form.input('publisher_uri', label=_('Publisher URI'), id='field-publisher_uri', placeholder=_('https://dice-research.org/'), value=publisher_uri_value, error=errors.publisher_uri, classes=['control-medium']) }}
 {% endblock %}
