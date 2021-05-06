@@ -15,6 +15,7 @@ class DatasetMetadataPlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm)
         #                      'dataset_metadata')
 
     def _modify_package_schema(self, schema):
+        print(schema)
         schema.update({
             'publisher_uri': [toolkit.get_validator('ignore_missing'),
                               toolkit.get_converter('convert_to_extras')]
